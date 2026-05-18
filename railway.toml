@@ -3,6 +3,9 @@
 [build]
 builder = "RAILPACK"
 
+[build.env]
+RAILPACK_DEPLOY_APT_PACKAGES = "libpq-dev"
+
 [deploy]
 preDeployCommand = "python init_db.py"
 startCommand = "gunicorn app:app --bind 0.0.0.0:$PORT"
