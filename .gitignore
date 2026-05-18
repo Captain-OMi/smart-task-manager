@@ -1,0 +1,10 @@
+# This file is used to keep private, local, generated, and machine-specific files out of Git for the Smart Task Manager project, including virtual environments, real environment secrets, Python cache files, logs, and editor settings.
+
+venv/
+.venv/
+__pycache__/
+*.pyc
+.env
+*.log
+.vscode/
+.idea/

@@ -1,0 +1,13 @@
+<!-- This file is used to show clean error pages for the Smart Task Manager project, displaying friendly messages for missing pages, server errors, and other Flask error handlers. -->
+{% extends "base.html" %}
+
+{% block title %}Error {{ code }} | Smart Task Manager{% endblock %}
+
+{% block content %}
+<section class="auth-card center-text">
+    <p class="eyebrow">Error {{ code }}</p>
+    <h1>{{ message }}</h1>
+    <p class="muted">Go back to the main application and continue your workflow.</p>
+    <a class="button-link large" href="{{ url_for('auth.home') }}">Back Home</a>
+</section>
+{% endblock %}

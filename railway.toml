@@ -1,0 +1,12 @@
+# This file is used by Railway Config as Code to deploy the Smart Task Manager Flask app with Railpack, initialize the PostgreSQL schema before release, run Gunicorn on Railway's PORT variable, enable a healthcheck endpoint, and restart the service on failures.
+
+[build]
+builder = "RAILPACK"
+
+[deploy]
+preDeployCommand = "python init_db.py"
+startCommand = "gunicorn app:app --bind 0.0.0.0:$PORT"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10

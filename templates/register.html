@@ -1,0 +1,36 @@
+<!-- This file is used to show the registration screen for new Smart Task Manager users, collecting name, email, password, and confirmation details before storing a secure hashed password in PostgreSQL. -->
+{% extends "base.html" %}
+
+{% block title %}Register | Smart Task Manager{% endblock %}
+
+{% block content %}
+<section class="auth-card">
+    <div>
+        <p class="eyebrow">Create account</p>
+        <h1>Start your task workspace</h1>
+        <p class="muted">Register once, then login to create, update, complete, and delete your own tasks.</p>
+    </div>
+
+    <form class="form" method="POST" action="{{ url_for('auth.register') }}">
+        <label>
+            Name
+            <input type="text" name="name" placeholder="Your full name" required>
+        </label>
+        <label>
+            Email
+            <input type="email" name="email" placeholder="you@example.com" required>
+        </label>
+        <label>
+            Password
+            <input type="password" name="password" placeholder="Create password" required>
+        </label>
+        <label>
+            Confirm Password
+            <input type="password" name="confirm_password" placeholder="Repeat password" required>
+        </label>
+        <button type="submit">Register</button>
+    </form>
+
+    <p class="center-text">Already registered? <a href="{{ url_for('auth.login') }}">Login here</a></p>
+</section>
+{% endblock %}

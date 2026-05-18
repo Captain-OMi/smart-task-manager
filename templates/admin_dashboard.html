@@ -1,0 +1,48 @@
+<!-- This file is used to display the admin dashboard for the Smart Task Manager project, allowing admin users to view all registered users, view all tasks with owner details, delete users, and delete any task through protected admin REST API routes. -->
+{% extends "base.html" %}
+
+{% block title %}Admin | Smart Task Manager{% endblock %}
+
+{% block content %}
+<section class="dashboard-header">
+    <div>
+        <p class="eyebrow">Admin Dashboard</p>
+        <h1>System Control</h1>
+        <p class="muted">Monitor users and tasks across the complete Smart Task Manager system.</p>
+    </div>
+    <div class="stat-strip">
+        <div><strong id="adminUserCount">0</strong><span>Users</span></div>
+        <div><strong id="adminTaskCount">0</strong><span>Tasks</span></div>
+    </div>
+</section>
+
+<section class="admin-grid">
+    <section class="panel">
+        <div class="panel-heading">
+            <h2>Users</h2>
+            <button type="button" class="secondary small" id="refreshUsers">Refresh</button>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="userTable"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <h2>All Tasks</h2>
+            <button type="button" class="secondary small" id="refreshAdminTasks">Refresh</button>
+        </div>
+        <div class="task-list" id="adminTaskList"></div>
+    </section>
+</section>
+{% endblock %}

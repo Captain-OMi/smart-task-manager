@@ -1,0 +1,54 @@
+<!-- This file is used to display the normal user dashboard for the Smart Task Manager project, where logged-in users can create tasks, view their own task list, update task details, mark tasks completed, and delete tasks through REST API calls. -->
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Smart Task Manager{% endblock %}
+
+{% block content %}
+<section class="dashboard-header">
+    <div>
+        <p class="eyebrow">User Dashboard</p>
+        <h1>Your Tasks</h1>
+        <p class="muted">Create, update, complete, and remove tasks from your personal workspace.</p>
+    </div>
+    <div class="stat-strip">
+        <div><strong id="totalTasks">0</strong><span>Total</span></div>
+        <div><strong id="completedTasks">0</strong><span>Completed</span></div>
+        <div><strong id="pendingTasks">0</strong><span>Pending</span></div>
+    </div>
+</section>
+
+<section class="workspace-grid">
+    <form class="panel form" id="taskForm">
+        <input type="hidden" id="taskId">
+        <h2 id="formTitle">Add Task</h2>
+        <label>
+            Title
+            <input type="text" id="taskTitle" placeholder="Task title" required>
+        </label>
+        <label>
+            Description
+            <textarea id="taskDescription" rows="4" placeholder="Task description"></textarea>
+        </label>
+        <label>
+            Status
+            <select id="taskStatus">
+                <option value="pending">Pending</option>
+                <option value="in_progress">In Progress</option>
+                <option value="completed">Completed</option>
+            </select>
+        </label>
+        <div class="button-row">
+            <button type="submit">Save Task</button>
+            <button type="button" class="secondary" id="resetTaskForm">Reset</button>
+        </div>
+    </form>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <h2>Task List</h2>
+            <button type="button" class="secondary small" id="refreshTasks">Refresh</button>
+        </div>
+        <div class="task-list" id="taskList"></div>
+    </section>
+</section>
+{% endblock %}

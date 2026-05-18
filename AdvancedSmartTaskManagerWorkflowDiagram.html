@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Task Manager - Advanced Workflow Diagram</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Mermaid.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    // Configure Tailwind to accept custom components if needed
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#0f172a',
+              card: '#1e293b',
+              accent: '#38bdf8',
+              success: '#22c55e'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#0f172a] text-slate-200 font-sans min-h-screen antialiased selection:bg-sky-500/30 selection:text-sky-300">
+
+  <!-- Header Banner -->
+  <header class="max-w-6xl mx-auto pt-12 pb-6 px-4 text-center">
+    <span class="text-xs font-semibold tracking-widest text-emerald-400 uppercase bg-emerald-400/10 px-3 py-1 rounded-full border border-emerald-500/20">System Architecture Overview</span>
+    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-400 to-emerald-400 mt-3">
+      Smart Task Manager
+    </h1>
+    <p class="text-slate-400 mt-2 text-lg font-medium">Advanced Project Workflow & Architecture Documentation</p>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 pb-24 space-y-12">
+
+    <!-- 1. Complete System Workflow -->
+    <section class="bg-[#111827]/60 backdrop-blur-md border border-slate-800 p-6 md:p-8 rounded-2xl shadow-xl shadow-black/40">
+      <h2 class="text-xl font-bold text-emerald-400 flex items-center gap-2 mb-6">
+        <span class="flex h-3 w-3 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span></span>
+        1. Complete System Workflow
+      </h2>
+      <div class="mermaid bg-slate-950/80 p-4 rounded-xl border border-slate-800 overflow-x-auto shadow-inner">
+flowchart TD
+    A[User Opens Website] --> B{Registered User?}
+
+    B -- No --> C[Register Page]
+    C --> D[Input Validation]
+    D --> E[Store User In Database]
+    E --> F[Redirect To Login]
+
+    B -- Yes --> G[Login Page]
+    G --> H[Authentication]
+    H --> I{Valid Credentials?}
+
+    I -- No --> J[Show Error Message]
+    J --> G
+
+    I -- Yes --> K[Create Session]
+    K --> L{Role Check}
+
+    L -- User --> M[User Dashboard]
+    L -- Admin --> N[Admin Dashboard]
+
+    M --> O[Create Task]
+    M --> P[Update Task]
+    M --> Q[Delete Task]
+    M --> R[Mark Complete]
+
+    O --> S[(PostgreSQL Database)]
+    P --> S
+    Q --> S
+    R --> S
+
+    N --> T[View All Users]
+    N --> U[Delete Any Task]
+    N --> V[Delete Users]
+
+    T --> S
+    U --> S
+    V --> S
+
+    S --> W[REST API Response]
+    W --> X[Frontend Update]
+    X --> Y[User Logout]
+    Y --> Z[Session Destroyed]
+      </div>
+    </section>
+
+    <!-- 2. Project Architecture -->
+    <section class="bg-[#111827]/60 backdrop-blur-md border border-slate-800 p-6 md:p-8 rounded-2xl shadow-xl shadow-black/40">
+      <h2 class="text-xl font-bold text-emerald-400 mb-6">2. Project Architecture</h2>
+      <div class="mermaid bg-slate-950/80 p-4 rounded-xl border border-slate-800 overflow-x-auto shadow-inner">
+graph LR
+    A[Frontend HTML CSS JS]
+    B[Flask Backend]
+    C[REST APIs]
+    D[(PostgreSQL Database)]
+    E[Authentication]
+    F[Role Based Access]
+    G[Railway Deployment]
+    H[GitHub Repository]
+
+    A --> B
+    B --> C
+    C --> D
+    B --> E
+    E --> F
+    B --> G
+    H --> G
+      </div>
+    </section>
+
+    <!-- 3. Authentication Flow -->
+    <section class="bg-[#111827]/60 backdrop-blur-md border border-slate-800 p-6 md:p-8 rounded-2xl shadow-xl shadow-black/40">
+      <h2 class="text-xl font-bold text-emerald-400 mb-6">3. Authentication Flow</h2>
+      <div class="mermaid bg-slate-950/80 p-4 rounded-xl border border-slate-800 overflow-x-auto shadow-inner">
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Flask
+    participant Database
+
+    User->>Frontend: Enter Email & Password
+    Frontend->>Flask: Send Login Request
+    Flask->>Database: Check User
+    Database-->>Flask: User Data
+
+    alt Valid User
+        Flask-->>Frontend: Login Success
+        Frontend-->>User: Open Dashboard
+    else Invalid User
+        Flask-->>Frontend: Error Message
+        Frontend-->>User: Retry Login
+    end
+      </div>
+    </section>
+
+    <!-- 4. Database Relationship Diagram -->
+    <section class="bg-[#111827]/60 backdrop-blur-md border border-slate-800 p-6 md:p-8 rounded-2xl shadow-xl shadow-black/40">
+      <h2 class="text-xl font-bold text-emerald-400 mb-6">4. Database Relationship Diagram</h2>
+      <div class="mermaid bg-slate-950/80 p-4 rounded-xl border border-slate-800 overflow-x-auto shadow-inner">
+erDiagram
+    USERS {
+        int id
+        string name
+        string email
+        string password
+        string role
+    }
+    TASKS {
+        int id
+        string title
+        string description
+        string status
+        int user_id
+    }
+    USERS ||--o{ TASKS : creates
+      </div>
+    </section>
+
+    <!-- 5. REST API Flow -->
+    <section class="bg-[#111827]/60 backdrop-blur-md border border-slate-800 p-6 md:p-8 rounded-2xl shadow-xl shadow-black/40">
+      <h2 class="text-xl font-bold text-emerald-400 mb-6">5. REST API Flow</h2>
+      <div class="mermaid bg-slate-950/80 p-4 rounded-xl border border-slate-800 overflow-x-auto shadow-inner">
+flowchart LR
+    A[Frontend] --> B[GET API]
+    A --> C[POST API]
+    A --> D[PUT API]
+    A --> E[DELETE API]
+
+    B --> F[(Database)]
+    C --> F
+    D --> F
+    E --> F
+
+    F --> G[JSON Response]
+    G --> A
+      </div>
+    </section>
+
+    <!-- 6. API List -->
+    <section class="bg-[#111827]/60 backdrop-blur-md border border-slate-800 p-6 md:p-8 rounded-2xl shadow-xl shadow-black/40">
+      <h2 class="text-xl font-bold text-emerald-400 mb-6">6. API Endpoints Reference</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Card 1 -->
+        <div class="bg-[#1e293b]/70 border border-slate-700/60 rounded-xl p-5 hover:border-sky-500/40 transition-all duration-300 shadow-md">
+          <h3 class="text-sky-400 font-semibold text-lg border-b border-slate-700/60 pb-2 mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-sky-400"></span> Authentication
+          </h3>
+          <ul class="space-y-3 font-mono text-sm">
+            <li class="flex items-center justify-between bg-slate-900/50 p-2 rounded border border-slate-800"><span class="text-emerald-400 font-bold">POST</span> <code class="text-slate-300">/register</code></li>
+            <li class="flex items-center justify-between bg-slate-900/50 p-2 rounded border border-slate-800"><span class="text-emerald-400 font-bold">POST</span> <code class="text-slate-300">/login</code></li>
+            <li class="flex items-center justify-between bg-slate-900/50 p-2 rounded border border-slate-800"><span class="text-sky-400 font-bold">GET</span> <code class="text-slate-300">/logout</code></li>
+          </ul>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-[#1e293b]/70 border border-slate-700/60 rounded-xl p-5 hover:border-sky-500/40 transition-all duration-300 shadow-md">
+          <h3 class="text-sky-400 font-semibold text-lg border-b border-slate-700/60 pb-2 mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-indigo-400"></span> Task Operations
+          </h3>
+          <ul class="space-y-3 font-mono text-sm">
+            <li class="flex items-center justify-between bg-slate-900/50 p-2 rounded border border-slate-800"><span class="text-sky-400 font-bold">GET</span> <code class="text-slate-300">/tasks</code></li>
+            <li class="flex items-center justify-between bg-slate-900/50 p-2 rounded border border-slate-800"><span class="text-emerald-400 font-bold">POST</span> <code class="text-slate-300">/task/add</code></li>
+            <li class="flex items-center justify-between bg-slate-900/50 p-2 rounded border border-slate-800"><span class="text-amber-400 font-bold">PUT</span> <code class="text-slate-300">/task/update</code></li>
+            <li class="flex items-center justify-between bg-slate-900/50 p-2 rounded border border-slate-800"><span class="text-rose-400 font-bold">DELETE</span> <code class="text-slate-300">/task/delete</code></li>
+          </ul>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-[#1e293b]/70 border border-slate-700/60 rounded-xl p-5 hover:border-sky-500/40 transition-all duration-300 shadow-md">
+          <h3 class="text-sky-400 font-semibold text-lg border-b border-slate-700/60 pb-2 mb-4 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-rose-400"></span> Admin Controls
+          </h3>
+          <ul class="space-y-3 font-mono text-sm">
+            <li class="flex items-center justify-between bg-slate-900/50 p-2 rounded border border-slate-800"><span class="text-sky-400 font-bold">GET</span> <code class="text-slate-300">/users</code></li>
+            <li class="flex items-center justify-between bg-slate-900/50 p-2 rounded border border-slate-800"><span class="text-rose-400 font-bold">DELETE</span> <code class="text-slate-300">/user/delete</code></li>
+            <li class="flex items-center justify-between bg-slate-900/50 p-2 rounded border border-slate-800"><span class="text-rose-400 font-bold">DELETE</span> <code class="text-slate-300">/admin/task/delete</code></li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 7. Folder Structure -->
+    <section class="bg-[#111827]/60 backdrop-blur-md border border-slate-800 p-6 md:p-8 rounded-2xl shadow-xl shadow-black/40">
+      <h2 class="text-xl font-bold text-emerald-400 mb-6">7. Repository Folder Structure</h2>
+      <div class="mermaid bg-slate-950/80 p-4 rounded-xl border border-slate-800 overflow-x-auto shadow-inner">
+flowchart TD
+    A[smart-task-manager]
+    A --> B[app.py]
+    A --> C[requirements.txt]
+    A --> D[README.md]
+    A --> E[templates]
+    A --> F[static]
+    A --> G[routes]
+    A --> H[models]
+    A --> I[database]
+
+    E --> E1[login.html]
+    E --> E2[register.html]
+    E --> E3[dashboard.html]
+
+    F --> F1[style.css]
+    F --> F2[script.js]
+
+    G --> G1[auth.py]
+    G --> G2[task.py]
+
+    H --> H1[user.py]
+    H --> H2[task.py]
+      </div>
+    </section>
+
+    <!-- 8. Deployment Workflow -->
+    <section class="bg-[#111827]/60 backdrop-blur-md border border-slate-800 p-6 md:p-8 rounded-2xl shadow-xl shadow-black/40">
+      <h2 class="text-xl font-bold text-emerald-400 mb-6">8. Deployment Workflow</h2>
+      <div class="mermaid bg-slate-950/80 p-4 rounded-xl border border-slate-800 overflow-x-auto shadow-inner">
+flowchart TD
+    A[Complete Project] --> B[Push Code To GitHub]
+    B --> C[Create Railway Account]
+    C --> D[Connect GitHub Repo]
+    D --> E[Add Environment Variables]
+    E --> F[Deploy Application]
+    F --> G[Generate Live URL]
+    G --> H[Test Live Website]
+    H --> I[Submit Project]
+      </div>
+    </section>
+
+    <!-- 9. Learning Path Roadmap -->
+    <section class="bg-[#111827]/60 backdrop-blur-md border border-slate-800 p-6 md:p-8 rounded-2xl shadow-xl shadow-black/40">
+      <h2 class="text-xl font-bold text-emerald-400 mb-6">9. Learning Path Roadmap</h2>
+      <div class="mermaid bg-slate-950/80 p-4 rounded-xl border border-slate-800 overflow-x-auto shadow-inner">
+flowchart LR
+    A[Learn Flask Basics]
+    --> B[Learn Database]
+    --> C[Build Authentication]
+    --> D[Build CRUD APIs]
+    --> E[Add Role System]
+    --> F[Test APIs]
+    --> G[Deploy On Railway]
+    --> H[Create README]
+    --> I[Record Demo Video]
+      </div>
+    </section>
+
+    <!-- 10. Technologies Used -->
+    <section class="bg-[#111827]/60 backdrop-blur-md border border-slate-800 p-6 md:p-8 rounded-2xl shadow-xl shadow-black/40">
+      <h2 class="text-xl font-bold text-emerald-400 mb-6">10. Technologies Used</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-xl">
+          <h3 class="text-sky-400 font-semibold mb-3 flex items-center gap-2">🚀 Frontend</h3>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li class="bg-[#1e293b]/50 px-3 py-1.5 rounded border border-slate-800">HTML5 Semantic Elements</li>
+            <li class="bg-[#1e293b]/50 px-3 py-1.5 rounded border border-slate-800">CSS3 Custom Layouts</li>
+            <li class="bg-[#1e293b]/50 px-3 py-1.5 rounded border border-slate-800">JavaScript Fetch API</li>
+          </ul>
+        </div>
+
+        <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-xl">
+          <h3 class="text-emerald-400 font-semibold mb-3 flex items-center gap-2">⚙️ Backend</h3>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li class="bg-[#1e293b]/50 px-3 py-1.5 rounded border border-slate-800">Python OOP</li>
+            <li class="bg-[#1e293b]/50 px-3 py-1.5 rounded border border-slate-800">Flask Web Framework</li>
+            <li class="bg-[#1e293b]/50 px-3 py-1.5 rounded border border-slate-800">RESTful Route Design</li>
+          </ul>
+        </div>
+
+        <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-xl">
+          <h3 class="text-indigo-400 font-semibold mb-3 flex items-center gap-2">🗄️ Database</h3>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li class="bg-[#1e293b]/50 px-3 py-1.5 rounded border border-slate-800">PostgreSQL Engine</li>
+            <li class="bg-[#1e293b]/50 px-3 py-1.5 rounded border border-slate-800">Relational SQL Queries</li>
+            <li class="bg-[#1e293b]/50 px-3 py-1.5 rounded border border-slate-800">Foreign Key Constraints</li>
+          </ul>
+        </div>
+
+        <div class="bg-slate-900/80 border border-slate-800 p-5 rounded-xl">
+          <h3 class="text-amber-400 font-semibold mb-3 flex items-center gap-2">☁️ Deployment</h3>
+          <ul class="space-y-2 text-sm text-slate-400">
+            <li class="bg-[#1e293b]/50 px-3 py-1.5 rounded border border-slate-800">GitHub Version Control</li>
+            <li class="bg-[#1e293b]/50 px-3 py-1.5 rounded border border-slate-800">Railway PaaS Cloud</li>
+            <li class="bg-[#1e293b]/50 px-3 py-1.5 rounded border border-slate-800">Live Environment Config</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 11. Final Goal -->
+    <section class="bg-gradient-to-r from-indigo-950 via-slate-900 to-emerald-950 border border-indigo-500/20 p-6 md:p-8 rounded-2xl shadow-xl shadow-black/40">
+      <h2 class="text-xl font-bold text-sky-400 mb-4 flex items-center gap-2">🎯 Educational Target Objectives</h2>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-slate-300">
+        <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Understand complete backend development workflow</li>
+        <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Learn real-world production ready structure</li>
+        <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Build clean REST APIs professionally</li>
+        <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Map and execute deep database relationships</li>
+        <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Successfully deploy live cloud projects</li>
+        <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Build portfolio/industry-level GitHub projects</li>
+        <li class="flex items-start gap-2"><span class="text-emerald-400">✓</span> Absolute technical assessment readiness</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <script>
+    // Initializing Mermaid Engine with a cohesive dark theme config
+    mermaid.initialize({ 
+      startOnLoad: true,
+      theme: 'dark',
+      themeVariables: {
+        background: '#020617',
+        primaryColor: '#1e293b',
+        primaryTextColor: '#f8fafc',
+        lineColor: '#38bdf8',
+        signalColor: '#22c55e',
+        secondaryColor: '#0f172a'
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!-- This file is used to show the login screen for registered Smart Task Manager users, collecting email and password details before the Flask authentication route validates credentials and creates a session. -->
+{% extends "base.html" %}
+
+{% block title %}Login | Smart Task Manager{% endblock %}
+
+{% block content %}
+<section class="auth-card">
+    <div>
+        <p class="eyebrow">Welcome back</p>
+        <h1>Login to manage your tasks</h1>
+        <p class="muted">Access your dashboard, update task progress, and keep your work organized.</p>
+    </div>
+
+    <form class="form" method="POST" action="{{ url_for('auth.login') }}">
+        <label>
+            Email
+            <input type="email" name="email" placeholder="you@example.com" required>
+        </label>
+        <label>
+            Password
+            <input type="password" name="password" placeholder="Enter password" required>
+        </label>
+        <button type="submit">Login</button>
+    </form>
+
+    <p class="center-text">New user? <a href="{{ url_for('auth.register') }}">Create an account</a></p>
+</section>
+{% endblock %}
