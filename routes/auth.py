@@ -96,6 +96,9 @@ def register():
     except RuntimeError as error:
         flash(str(error), "error")
         return redirect(url_for("auth.register"))
+    except Exception:
+        flash("Unable to send verification email. Please check SMTP email settings and try again.", "error")
+        return redirect(url_for("auth.register"))
 
     session["pending_registration_email"] = email
     flash("Verification code sent to your email. Please enter it to complete registration.", "success")
