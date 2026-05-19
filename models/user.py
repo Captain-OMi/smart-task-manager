@@ -5,8 +5,8 @@ from werkzeug.security import generate_password_hash
 from database.db import execute_query
 
 
-def create_user(name, email, password, role="user"):
-    password_hash = generate_password_hash(password)
+def create_user(name, email, password, role="user", password_already_hashed=False):
+    password_hash = password if password_already_hashed else generate_password_hash(password)
 
     query = """
         INSERT INTO users (name, email, password_hash, role)

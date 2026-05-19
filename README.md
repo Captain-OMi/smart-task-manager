@@ -7,6 +7,7 @@ Smart Task Manager is a Flask, PostgreSQL, HTML, CSS, and JavaScript project for
 ## Features
 
 - User registration and login
+- Email OTP verification before account creation
 - Secure password hashing
 - Session-based authentication
 - User dashboard for task CRUD operations
@@ -77,6 +78,8 @@ pip install -r requirements.txt
 
 Create a real `.env` file by copying `.env.example`, then update the PostgreSQL password and secret key.
 
+For OTP email verification, also update the `MAIL_*` values. If you use Gmail, create a Gmail App Password and use that as `MAIL_PASSWORD`.
+
 ## Database Setup
 
 Create a PostgreSQL database named `smart_task_manager`.
@@ -126,6 +129,8 @@ http://127.0.0.1:5000
 Authentication:
 
 - `POST /register`
+- `GET /verify-otp`
+- `POST /verify-otp`
 - `POST /login`
 - `GET /logout`
 - `GET /api/session`

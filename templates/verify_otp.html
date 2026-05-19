@@ -1,0 +1,28 @@
+<!-- This file is used to verify new Smart Task Manager registrations by collecting the email OTP sent to the user and only completing account creation after the correct verification code is submitted. -->
+{% extends "base.html" %}
+
+{% block title %}Verify Account | Smart Task Manager{% endblock %}
+
+{% block content %}
+<section class="auth-card">
+    <div>
+        <p class="eyebrow">Email verification</p>
+        <h1>Enter verification code</h1>
+        <p class="muted">A 6 digit code was sent to your email. The account will be created only after verification.</p>
+    </div>
+
+    <form class="form" method="POST" action="{{ url_for('auth.verify_otp') }}" autocomplete="off">
+        <label>
+            Email
+            <input type="email" name="email" value="{{ email }}" placeholder="you@example.com" autocomplete="off" required>
+        </label>
+        <label>
+            Verification Code
+            <input type="text" name="otp" placeholder="Enter 6 digit code" inputmode="numeric" maxlength="6" autocomplete="one-time-code" required>
+        </label>
+        <button type="submit">Verify Account</button>
+    </form>
+
+    <p class="center-text">Need to restart? <a href="{{ url_for('auth.register') }}">Register again</a></p>
+</section>
+{% endblock %}

@@ -11,22 +11,22 @@
         <p class="muted">Register once, then login to create, update, complete, and delete your own tasks.</p>
     </div>
 
-    <form class="form" method="POST" action="{{ url_for('auth.register') }}">
+    <form class="form" method="POST" action="{{ url_for('auth.register') }}" autocomplete="off">
         <label>
             Name
-            <input type="text" name="name" placeholder="Your full name" required>
+            <input type="text" name="name" placeholder="Your full name" autocomplete="off" required>
         </label>
         <label>
             Email
-            <input type="email" name="email" placeholder="you@example.com" required>
+            <input type="email" name="email" placeholder="you@example.com" autocomplete="off" required>
         </label>
         <label>
             Password
-            <input type="password" name="password" placeholder="Create password" required>
+            <input type="password" name="password" placeholder="Create password" autocomplete="new-password" required>
         </label>
         <label>
             Confirm Password
-            <input type="password" name="confirm_password" placeholder="Repeat password" required>
+            <input type="password" name="confirm_password" placeholder="Repeat password" autocomplete="new-password" required>
         </label>
         <button type="submit">Register</button>
     </form>

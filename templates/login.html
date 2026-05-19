@@ -11,14 +11,14 @@
         <p class="muted">Access your dashboard, update task progress, and keep your work organized.</p>
     </div>
 
-    <form class="form" method="POST" action="{{ url_for('auth.login') }}">
+    <form class="form" method="POST" action="{{ url_for('auth.login') }}" autocomplete="off">
         <label>
             Email
-            <input type="email" name="email" placeholder="you@example.com" required>
+            <input type="email" name="email" placeholder="you@example.com" autocomplete="off" required>
         </label>
         <label>
             Password
-            <input type="password" name="password" placeholder="Enter password" required>
+            <input type="password" name="password" placeholder="Enter password" autocomplete="new-password" readonly onfocus="this.removeAttribute('readonly');" required>
         </label>
         <button type="submit">Login</button>
     </form>
