@@ -78,7 +78,7 @@ pip install -r requirements.txt
 
 Create a real `.env` file by copying `.env.example`, then update the PostgreSQL password and secret key.
 
-For OTP email verification, also update the `MAIL_*` values. If you use Gmail, create a Gmail App Password and use that as `MAIL_PASSWORD`.
+For OTP email verification, set `RESEND_API_KEY` and `RESEND_FROM_EMAIL` in production. SMTP `MAIL_*` values are also supported for local experiments, but Resend is recommended for Railway deployments.
 
 ## Database Setup
 
