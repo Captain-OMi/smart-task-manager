@@ -67,6 +67,7 @@ def send_registration_otp_with_resend(email, name, otp, api_key):
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
+            "User-Agent": "smart-task-manager/1.0",
         },
         method="POST",
     )
@@ -77,6 +78,11 @@ def send_registration_otp_with_resend(email, name, otp, api_key):
                 raise RuntimeError(f"Resend email API failed with status {response.status}.")
     except HTTPError as error:
         details = error.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"Resend email API failed: {details}") from error
+        try:
+            parsed = json.loads(details)
+            message = parsed.get("message") or parsed.get("error") or details
+        except json.JSONDecodeError:
+            message = details
+        raise RuntimeError(f"Resend email API failed: {message}") from error
     except URLError as error:
         raise RuntimeError(f"Unable to reach Resend email API: {error.reason}") from error
