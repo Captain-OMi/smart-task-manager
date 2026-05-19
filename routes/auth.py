@@ -94,9 +94,11 @@ def register():
         flash("Email already registered. Please login.", "error")
         return redirect(url_for("auth.login"))
     except RuntimeError as error:
+        delete_pending_registration(email)
         flash(str(error), "error")
         return redirect(url_for("auth.register"))
     except Exception:
+        delete_pending_registration(email)
         flash("Unable to send verification email. Please check SMTP email settings and try again.", "error")
         return redirect(url_for("auth.register"))
 

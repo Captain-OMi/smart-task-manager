@@ -12,6 +12,7 @@ def send_registration_otp(email, name, otp):
     mail_password = os.getenv("MAIL_PASSWORD")
     mail_sender = os.getenv("MAIL_DEFAULT_SENDER") or mail_username
     use_tls = os.getenv("MAIL_USE_TLS", "true").lower() == "true"
+    mail_timeout = int(os.getenv("MAIL_TIMEOUT", "8"))
 
     if not all([mail_server, mail_username, mail_password, mail_sender]):
         raise RuntimeError("Email SMTP settings are missing. Please configure MAIL_* variables.")
@@ -27,8 +28,11 @@ def send_registration_otp(email, name, otp):
         "If you did not request this account, please ignore this email."
     )
 
-    with smtplib.SMTP(mail_server, mail_port) as smtp:
-        if use_tls:
-            smtp.starttls()
-        smtp.login(mail_username, mail_password)
-        smtp.send_message(message)
+    try:
+        with smtplib.SMTP(mail_server, mail_port, timeout=mail_timeout) as smtp:
+            if use_tls:
+                smtp.starttls()
+            smtp.login(mail_username, mail_password)
+            smtp.send_message(message)
+    except (OSError, TimeoutError, smtplib.SMTPException) as error:
+        raise RuntimeError(f"Unable to send verification email: {error}") from error
