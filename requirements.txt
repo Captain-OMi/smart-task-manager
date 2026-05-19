@@ -1,6 +1,6 @@
 # This file lists all Python packages required to run the Smart Task Manager Flask project, including the web framework, PostgreSQL database connector, environment variable loader, password hashing support, and production server.
 Flask==3.0.3
-psycopg2-binary==2.9.9
+psycopg2-binary==2.9.11
 python-dotenv==1.0.1
 Werkzeug==3.0.3
 gunicorn==22.0.0

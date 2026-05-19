@@ -1,0 +1,2 @@
+# This file is used by Python tooling and Railway/Railpack to select Python 3.11.9 for the Smart Task Manager project during deployment and local development.
+3.11.9

@@ -1,0 +1,2 @@
+# This file is used by Railway/Railpack to pin the Smart Task Manager production Python runtime to Python 3.11 so PostgreSQL dependencies use stable, widely supported Python wheels instead of a newer default runtime.
+3.11.9
